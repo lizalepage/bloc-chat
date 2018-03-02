@@ -36,7 +36,7 @@ class RoomList extends Component {
   handleSubmit(event) {
     this.roomsRef.push({name: this.state.newRoomName});
     event.preventDefault();
-    this.state.newRoomName="";
+    this.setState({newRoomName: ""});
 
   }
 
@@ -51,14 +51,14 @@ class RoomList extends Component {
         <h1 className="chat-room-title">Chat Rooms </h1>
         {
           this.state.rooms.map((room) =>
-          <div className="chat-room-name"> {room.name} </div>
+          <li key={room.key} className="chat-room-name"> {room.name} </li>
 
         )
       }
       <form id="newRoomForm" onSubmit={this.handleSubmit}>
         <label>
           Create New Room
-          <input type="text" value={this.state.newRoomName} onChange={this.handleChange} />
+          <input type="text" key={this.state.rooms.length} value={this.state.newRoomName} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Add"/>
       </form>
