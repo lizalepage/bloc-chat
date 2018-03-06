@@ -4,18 +4,39 @@ body {
   font-family: sans-serif;
 }
 
-label, input {
-display: block;
-margin: auto;
-margin-bottom: 20px;
 
+#newRoomForm{
+  padding: 20px 20px 20px 20px;
+  display: block;
+  float: left;
 }
 
-label{
-  padding-top: 20px;
+input{
+  display: block;
+  margin: 10px, 10px, 10px, 10px
+}
+
+.new-room-button{
+  margin-top: 10px;
+  margin: auto;
+
 }
 
 .chat-room-title, .chat-room-name{
   text-align: left;
+  margin-left: 20px;
+}
+
+.chat-box{
+  float: left;
   padding-left: 20px;
+  display: block;
+  position: fixed;
+  left: 20px;
+  border-width: medium;
+}
+
+.title-of-active, .messagelist{
+  float: left;
+  padding-left: 20em;
 }

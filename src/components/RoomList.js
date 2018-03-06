@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import * as firebase from 'firebase';
 
 
 
@@ -47,11 +47,13 @@ class RoomList extends Component {
   render(){
 
     return(
-      <section className="room-list">
+      <section className="chat-box">
         <h1 className="chat-room-title">Chat Rooms </h1>
         {
-          this.state.rooms.map((room) =>
-          <li key={room.key} className="chat-room-name"> {room.name} </li>
+          this.state.rooms.map((room, index) =>
+          <li key={room.key} className="chat-room-name"> <button onClick={() => this.props.activateRoom(room)}>  {room.name}
+          </button>
+          </li>
 
         )
       }
@@ -60,7 +62,7 @@ class RoomList extends Component {
           Create New Room
           <input type="text" key={this.state.rooms.length} value={this.state.newRoomName} onChange={this.handleChange} />
         </label>
-        <input type="submit" value="Add"/>
+        <input className="new-room-button" type="submit" value="Add"/>
       </form>
 
 
