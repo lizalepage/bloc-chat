@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import * as firebase from 'firebase';
 
 
 class User extends Component {
@@ -25,7 +24,7 @@ class User extends Component {
     signOut(e){
       e.preventDefault();
       this.props.firebase.auth().signOut();
-      this.props.setUser({displayName: null });
+      this.props.setUser(null);
     }
 
     componentDidMount(){

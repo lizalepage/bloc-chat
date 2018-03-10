@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as firebase from 'firebase';
+
 
 
 class MessageList extends Component {
@@ -9,6 +9,9 @@ class MessageList extends Component {
 
   this.state = {
     messages: [],
+    username: "",
+    content: "",
+    sentAT: "",
 
 
   };
@@ -27,6 +30,14 @@ class MessageList extends Component {
 
   }
 
+  handleMessageSend(){
+
+    }
+
+  handleChange(){
+
+  }
+
 
   render(){
 
@@ -41,10 +52,14 @@ class MessageList extends Component {
                 return <div key={message.roomID}> {message.username}: {message.content} </div>
                 }
                 return null;
-      }
+              }
 
 
-  )}
+            )}
+        <form id="newRoomForm" onSubmit={this.handleMessageSend}>
+          <input type="text" value="write your message here" onChange={this.handleChange} />
+          <input className="new-message-button" type="submit" value="send"/>
+        </form>
   </section>
 
 

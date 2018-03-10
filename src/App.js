@@ -40,7 +40,11 @@ class App extends Component {
   };
 
   setUser(user){
-  this.setState({currentUser: user.displayName});
+  if(user!= null){this.setState({currentUser: user.displayName});
+
+}
+else{this.setState({currentUser: null});
+}
 
 }
 
