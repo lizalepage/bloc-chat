@@ -23,7 +23,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      activeRoom: "Welcome",
+      activeRoom: "",
       currentUser: null,
 
     };
@@ -56,7 +56,7 @@ else{this.setState({currentUser: null});
           <User setUser={this.setUser} currentUser={this.state.currentUser} firebase={firebase}/>
         </header>
         <RoomList firebase={firebase} activeRoom={this.state.activeRoom} activateRoom={this.activateRoom}/>
-        <MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
+        <MessageList firebase={firebase} activeRoom={this.state.activeRoom} currentUser={this.state.currentUser} />
 
 
       </div>

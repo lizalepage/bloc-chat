@@ -11,13 +11,14 @@ class MessageList extends Component {
     messages: [],
     username: "",
     content: "",
-    sentAT: "",
+    sentAt: "",
+    RoomID: "",
 
 
   };
-
+  this.handleChange = this.handleChange.bind(this);
   this.messagesRef = this.props.firebase.database().ref('messages');
-
+  this.handleMessageSend = this.handleMessageSend.bind(this);
 }
 
   componentDidMount (){
@@ -30,11 +31,39 @@ class MessageList extends Component {
 
   }
 
-  handleMessageSend(){
+  handleMessageSend(e){
+    e.preventDefault();
+    const messageRef = this.props.firebase.database().ref("messages/");
+    messageRef.push({
+      username: this.state.username,
+      content: this.state.content,
+      sentAt: this.state.sentAt,
+      roomID: this.state.roomID
+    });
+    this.setState({ username: "", content: "", sentAt: "", roomID:""});
+}
+
+
+
+  handleChange(e){
+    if(typeof this.props.activeRoom.key === 'undefined'){
+      alert("select room first!")
+      return;
 
     }
 
-  handleChange(){
+    else{
+      if(this.props.currentUser!==null){
+        this.setState({username: this.props.currentUser});
+      }
+      else{
+        this.setState({username: "Guest"});
+      }
+      this.setState({
+        sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+        roomID: this.props.activeRoom.key,
+        content: e.target.value});
+    }
 
   }
 
@@ -49,15 +78,15 @@ class MessageList extends Component {
           {
             this.state.messages.map( (message, index) => {
               if (message.roomID === this.props.activeRoom.key) {
-                return <div key={message.roomID}> {message.username}: {message.content} </div>
+                return <div key={message.key}> {message.username}: {message.content} </div>
                 }
                 return null;
               }
 
 
             )}
-        <form id="newRoomForm" onSubmit={this.handleMessageSend}>
-          <input type="text" value="write your message here" onChange={this.handleChange} />
+        <form id="newMessageForm" onSubmit={this.handleMessageSend}>
+          <input type="text" placeholder="Type message here" value={this.state.content} onChange={this.handleChange} />
           <input className="new-message-button" type="submit" value="send"/>
         </form>
   </section>
